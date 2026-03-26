@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SurfCast - Panel de Pronóstico de Surf Premium</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1152d4",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-6 py-3 lg:px-10">
+<div class="flex items-center gap-4 text-primary">
+<div class="flex items-center justify-center p-2 rounded-lg bg-primary/10">
+<span class="material-symbols-outlined text-primary text-3xl" style="">surfing</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-black leading-tight tracking-tight" style="">SurfCast</h2>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden md:flex flex-col min-w-40 h-10 max-w-md w-full" style="">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full bg-slate-100 dark:bg-slate-800 border border-transparent focus-within:border-primary/30 transition-all">
+<div class="text-slate-500 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl" style="">search</span>
+</div>
+<input class="form-input flex w-full border-none bg-transparent focus:ring-0 text-sm font-normal px-4 placeholder:text-slate-500" placeholder="Buscar playas globales..." value=""/>
+</div>
+</label>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors" style="">
+<span class="material-symbols-outlined" style="">notifications</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-primary/10 hover:text-primary transition-colors" style="">
+<span class="material-symbols-outlined" style="">settings</span>
+</button>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary/20 border-2 border-primary/10 overflow-hidden shrink-0">
+<img alt="Perfil de usuario" class="h-full w-full object-cover" data-alt="Close up portrait of a smiling person" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-WxGyA6Ve96ao5g9qcRVFzCsudIYGIh7y-rrCiSTUQvLW6mIC10OZw9xjQuEKrvDeiM2Ii8JwSrEqFuT4X4NHezUsjqpVeE8cZyZH3rsKR1GkBrBzLfG_EWykvLFa5P0xUmgSBgIQsdDxBdwRQ-ao6QF_teWp5uLLUO-cUzsKBI2sBlSlfQJ-Vo6MqnYse1kgTtXERZJPpAta8hfH2A8qW4tf8rPq0y6x-en7hz_N3jALy9AIBC1UNg7JIJnGiC_X0Q1IU4_rvO0A" style=""/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Sidebar -->
+<aside class="hidden lg:flex w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 overflow-y-auto">
+<div class="mb-8">
+<h3 class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-4 px-2" style="">MENÚ PRINCIPAL</h3>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary text-white font-medium shadow-lg shadow-primary/20" href="#" style="">
+<span class="material-symbols-outlined" style="">dashboard</span>
+<span class="text-sm" style="">Panel</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#" style="">
+<span class="material-symbols-outlined" style="">map</span>
+<span class="text-sm" style="">Mapa Global</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#" style="">
+<span class="material-symbols-outlined" style="">groups</span>
+<span class="text-sm" style="">Comunidad</span>
+</a>
+</nav>
+</div>
+<div>
+<div class="flex items-center justify-between mb-4 px-2">
+<h3 class="text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider" style="">PLAYAS FAVORITAS</h3>
+<button class="text-primary hover:text-primary/80 transition-colors" style="">
+<span class="material-symbols-outlined text-lg" style="">add_circle</span>
+</button>
+</div>
+<div class="space-y-3">
+<div class="group cursor-pointer flex items-center gap-3 p-3 rounded-xl border border-primary bg-primary/5 dark:bg-primary/10">
+<div class="h-10 w-10 rounded-lg overflow-hidden shrink-0">
+<img alt="Los Pocitos" class="h-full w-full object-cover" data-alt="High angle view of waves breaking on a beach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgeyCVtPlSXko-fFsx5wH-B00TJecT0sV6iZ90agaslbp9Y6hdoVuIgi4F6LcehnCceUbnQhFCtbuWXIKa7aoJXvzS20OPV_xOOki8VWEeNtKauVgwK9Z1ubf1xWm6gn03QwS24I-4DNvdZ65U3nI-I69O3yEgbi5POzncvYKejPrJQBUNyIaqX51nnJFId4HuoJJgaClu4WTFy7_-dIfRyARgds7v9qA655yaXg59fFSDJbLGT2_AqNenMPmUNyaE_kafFzfsaJcB" style=""/>
+</div>
+<div class="flex-1 overflow-hidden">
+<h4 class="text-sm font-bold text-slate-900 dark:text-slate-100 truncate" style="">Los Pocitos</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate" style="">VE - La Guaira</p>
+</div>
+<span class="material-symbols-outlined text-primary" style="">star</span>
+</div>
+<div class="group cursor-pointer flex items-center gap-3 p-3 rounded-xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700 bg-slate-50 dark:bg-slate-800/50 transition-all">
+<div class="h-10 w-10 rounded-lg overflow-hidden shrink-0 grayscale group-hover:grayscale-0 transition-all">
+<img alt="Los Caracas" class="h-full w-full object-cover" data-alt="Huge blue barrel wave in the ocean" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2nkaOa-qMixuz9wLV4U8J90qIH4dVZzc82VZcHl1wWPh2DhMTfVSNw1WJVJ5KQmoINYTLih1FauEV_Yr_uzSKdBGiRj-3rJ7aBH8J8LpgCGTu33fA0KkWlhlO7t3SABD0BfJRJrY3HBVvQgu92jThMyEIylfmNFISz0w5xBHnZfLVeLWHVzLOcH5gvghvvkj5FyM-zikl-WI75aeaWLQj7Z6qdwlIFz02nM1_34iANBUzkLkYuBv1WWXdOUwsKtM6olBgTj9IPnWl" style=""/>
+</div>
+<div class="flex-1 overflow-hidden">
+<h4 class="text-sm font-bold text-slate-900 dark:text-slate-100 truncate" style="">Los Caracas</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate" style="">VE - La Guaira</p>
+</div>
+</div>
+<div class="group cursor-pointer flex items-center gap-3 p-3 rounded-xl border border-transparent hover:border-slate-200 dark:hover:border-slate-700 bg-slate-50 dark:bg-slate-800/50 transition-all">
+<div class="h-10 w-10 rounded-lg overflow-hidden shrink-0 grayscale group-hover:grayscale-0 transition-all">
+<img alt="Aeropuerto" class="h-full w-full object-cover" data-alt="Scenic coastline with pine trees and ocean" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3DpuCoCyWXfT_3afMOl1ry5ahM1dYwiVIbb-MIDvyXyqn5Am8mRmuwKwFswRlIMIiVDTbQyfVJ8qlCVbv3xPpHn_bNu73pJEzSnyJoZOzvxqsnZr5FYjlJqxuraq6CodqBF1qFXxYDK88YKGDROEbpIGXOKGngEWfqcFoOAzTpwVLxDaIcJ5G3vNLc4VMJlIH7lFQZ4OhUudZkf6BH9PvjKl6Vrj7DCKko0AUJLcJknAjNwG9mgR7Z34O3pTjGuQcFrrs6Zg09WHL" style=""/>
+</div>
+<div class="flex-1 overflow-hidden">
+<h4 class="text-sm font-bold text-slate-900 dark:text-slate-100 truncate" style="">Aeropuerto</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 truncate" style="">VE - La Guaira</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-6">
+<div class="p-4 rounded-2xl bg-gradient-to-br from-primary to-blue-600 text-white shadow-xl shadow-primary/20">
+<span class="material-symbols-outlined mb-2" style="">workspace_premium</span>
+<h4 class="text-sm font-bold mb-1" style="">Hazte Premium</h4>
+<p class="text-[10px] opacity-90 mb-3 leading-relaxed" style="">Desbloquea pronósticos de 15 días y cámaras HD en vivo.</p>
+<button class="w-full py-2 bg-white text-primary text-xs font-bold rounded-lg hover:bg-slate-50 transition-colors" style="">Mejorar ahora</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark p-6 lg:p-10">
+<div class="max-w-6xl mx-auto">
+<!-- Spot Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<div class="flex items-center gap-2 text-primary font-semibold text-sm mb-2 uppercase tracking-wider" style="">
+<span class="material-symbols-outlined text-lg" style="">location_on</span>
+                                VE • LA GUAIRA</div>
+<h1 class="text-4xl lg:text-5xl font-black text-slate-900 dark:text-white tracking-tight" style="">Pronóstico Los Pocitos</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-2 text-lg" style="">Punto de izquierda consistente. Conocida como la mejor ola de desembocadura de río del mundo.</p>
+</div>
+<div class="flex items-center gap-4 bg-white dark:bg-slate-900 p-2 rounded-2xl border border-slate-200 dark:border-slate-800">
+<div class="px-4 py-2 border-r border-slate-100 dark:border-slate-800">
+<p class="text-xs text-slate-400 font-bold uppercase mb-1" style="">Temp. Agua</p>
+<p class="text-xl font-black text-slate-900 dark:text-white" style="">16°C</p>
+</div>
+<div class="px-4 py-2">
+<p class="text-xs text-slate-400 font-bold uppercase mb-1" style="">Clima</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-500" style="">sunny</span>
+<p class="text-xl font-black text-slate-900 dark:text-white" style="">21°C</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 3-Day Forecast Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+<!-- Day 1 -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white" style="">Hoy</h2>
+<span class="text-sm text-slate-500 font-medium" style="">12 May</span>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div>
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1" style="">ALTURA DE OLA</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-slate-900 dark:text-white" style="">1.8 - 2.5</span>
+<span class="text-lg font-bold text-slate-500" style="">m</span>
+</div>
+</div>
+<div class="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl" style="">tsunami</span>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-50 dark:bg-slate-800/30 p-3 rounded-2xl">
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1" style="">DIRECCIÓN</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary -rotate-45" style="">north_west</span>
+<span class="text-sm font-bold" style="">NW (310°)</span>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/30 p-3 rounded-2xl">
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1" style="">ENERGÍA</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-amber-500" style="">bolt</span>
+<span class="text-sm font-bold" style="">850 kJ</span>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 border border-emerald-100 dark:border-emerald-900/30 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-600" style="">air</span>
+<div>
+<p class="text-xs text-slate-500 font-medium" style="">Viento: Off-shore</p>
+<p class="text-sm font-bold text-slate-900 dark:text-white" style="">12 km/h SE</p>
+</div>
+</div>
+<div class="px-2 py-1 bg-emerald-600 text-white text-[10px] font-bold rounded-full uppercase tracking-tighter" style="">Excelente</div>
+</div>
+<div class="space-y-3 px-2">
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest" style="">MAREAS</p>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" style="">arrow_upward</span>
+<span class="font-medium" style="">Alta</span>
+</div>
+<span class="font-bold" style="">06:45 &amp; 19:12</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm" style="">arrow_downward</span>
+<span class="font-medium text-slate-500" style="">Baja</span>
+</div>
+<span class="font-bold" style="">12:54 &amp; 01:20</span>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<div class="relative overflow-hidden p-4 bg-primary text-white rounded-2xl">
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-1">
+<p class="text-[10px] font-black uppercase tracking-widest text-primary-200" style="">MEJOR VENTANA</p>
+<span class="material-symbols-outlined text-lg" style="">verified</span>
+</div>
+<p class="text-lg font-black leading-tight" style="">07:30 - 10:45</p>
+<p class="text-[10px] font-medium opacity-80 mt-1" style="">Marea media subiendo, vientos suaves de tierra.</p>
+</div>
+<div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Day 2 -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white" style="">Mañana</h2>
+<span class="text-sm text-slate-500 font-medium" style="">13 May</span>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div>
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1" style="">ALTURA DE OLA</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-slate-900 dark:text-white" style="">1.2 - 1.8</span>
+<span class="text-lg font-bold text-slate-500" style="">m</span>
+</div>
+</div>
+<div class="h-16 w-16 bg-slate-200 dark:bg-slate-700 rounded-2xl flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined text-4xl" style="">tsunami</span>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-50 dark:bg-slate-800/30 p-3 rounded-2xl">
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1" style="">DIRECCIÓN</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 rotate-0" style="">north</span>
+<span class="text-sm font-bold" style="">N (355°)</span>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/30 p-3 rounded-2xl">
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1" style="">ENERGÍA</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400" style="">bolt</span>
+<span class="text-sm font-bold" style="">420 kJ</span>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 border border-amber-100 dark:border-amber-900/30 bg-amber-50 dark:bg-amber-900/20 rounded-2xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-600" style="">air</span>
+<div>
+<p class="text-xs text-slate-500 font-medium" style="">Viento: On-shore</p>
+<p class="text-sm font-bold text-slate-900 dark:text-white" style="">25 km/h NW</p>
+</div>
+</div>
+<div class="px-2 py-1 bg-amber-600 text-white text-[10px] font-bold rounded-full uppercase tracking-tighter" style="">Pobre</div>
+</div>
+<div class="space-y-3 px-2">
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest" style="">MAREAS</p>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" style="">arrow_upward</span>
+<span class="font-medium" style="">Alta</span>
+</div>
+<span class="font-bold" style="">07:55 &amp; 20:22</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm" style="">arrow_downward</span>
+<span class="font-medium text-slate-500" style="">Baja</span>
+</div>
+<span class="font-bold" style="">14:04 &amp; 02:30</span>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<div class="p-4 bg-slate-100 dark:bg-slate-800 text-slate-400 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-700">
+<p class="text-[10px] font-black uppercase tracking-widest text-center" style="">Sin ventanas óptimas</p>
+<p class="text-[10px] text-center mt-1" style="">Vientos de mar afectando la forma de la ola.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Day 3 -->
+<div class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white" style="">Lunes</h2>
+<span class="text-sm text-slate-500 font-medium" style="">14 May</span>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+<div class="bg-slate-50 dark:bg-slate-800/50 p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<div>
+<p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1" style="">ALTURA DE OLA</p>
+<div class="flex items-baseline gap-1">
+<span class="text-4xl font-black text-slate-900 dark:text-white" style="">3.0 - 4.5</span>
+<span class="text-lg font-bold text-slate-500" style="">m</span>
+</div>
+</div>
+<div class="h-16 w-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl" style="">warning</span>
+</div>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-50 dark:bg-slate-800/30 p-3 rounded-2xl">
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1" style="">DIRECCIÓN</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary -rotate-45" style="">north_west</span>
+<span class="text-sm font-bold" style="">NW (315°)</span>
+</div>
+</div>
+<div class="bg-slate-50 dark:bg-slate-800/30 p-3 rounded-2xl">
+<p class="text-[10px] text-slate-400 font-bold uppercase mb-1" style="">ENERGÍA</p>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500" style="">bolt</span>
+<span class="text-sm font-bold" style="">1450 kJ</span>
+</div>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 border border-emerald-100 dark:border-emerald-900/30 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-600" style="">air</span>
+<div>
+<p class="text-xs text-slate-500 font-medium" style="">Viento: Off-shore</p>
+<p class="text-sm font-bold text-slate-900 dark:text-white" style="">18 km/h S</p>
+</div>
+</div>
+<div class="px-2 py-1 bg-emerald-600 text-white text-[10px] font-bold rounded-full uppercase tracking-tighter" style="">Solo Pro</div>
+</div>
+<div class="space-y-3 px-2">
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest" style="">MAREAS</p>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm" style="">arrow_upward</span>
+<span class="font-medium" style="">Alta</span>
+</div>
+<span class="font-bold" style="">09:05 &amp; 21:32</span>
+</div>
+<div class="flex items-center justify-between text-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-sm" style="">arrow_downward</span>
+<span class="font-medium text-slate-500" style="">Baja</span>
+</div>
+<span class="font-bold" style="">15:14 &amp; 03:40</span>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-slate-100 dark:border-slate-800">
+<div class="relative overflow-hidden p-4 bg-primary text-white rounded-2xl">
+<div class="relative z-10">
+<div class="flex items-center justify-between mb-1">
+<p class="text-[10px] font-black uppercase tracking-widest text-primary-200" style="">MEJOR VENTANA</p>
+<span class="material-symbols-outlined text-lg" style="">verified</span>
+</div>
+<p class="text-lg font-black leading-tight" style="">11:00 - 13:30</p>
+<p class="text-[10px] font-medium opacity-80 mt-1" style="">Gran swell llegando. La desembocadura aguanta bien el tamaño.</p>
+</div>
+<div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Extra Info Section -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white dark:bg-slate-900 p-8 rounded-3xl border border-slate-200 dark:border-slate-800">
+<h3 class="text-xl font-bold mb-6 flex items-center gap-2" style="">
+<span class="material-symbols-outlined text-primary" style="">analytics</span>
+                                Componentes del Swell
+                            </h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-2 w-2 rounded-full bg-primary"></div>
+<span class="text-sm font-medium" style="">Swell Primario</span>
+</div>
+<span class="text-sm font-bold" style="">2.4m @ 14s (NW)</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-2 w-2 rounded-full bg-slate-300"></div>
+<span class="text-sm font-medium" style="">Swell Secundario</span>
+</div>
+<span class="text-sm font-bold text-slate-500" style="">0.8m @ 8s (N)</span>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="h-2 w-2 rounded-full bg-slate-200"></div>
+<span class="text-sm font-medium" style="">Mar de Viento</span>
+</div>
+<span class="text-sm font-bold text-slate-500" style="">0.4m @ 4s (SE)</span>
+</div>
+</div>
+</div>
+<div class="relative overflow-hidden group rounded-3xl border border-slate-200 dark:border-slate-800 min-h-[250px]">
+<img alt="Cámara de playa en vivo" class="absolute inset-0 w-full h-full object-cover" data-alt="Top down view of waves crashing on rocks and beach" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdY2P1x0AtCJrG53JCVZ0r2eRAY8YNdWNJCLhBJG99vji4zbuGu0bNZraY5WqDGhz01Xax4ZdvBWarmIGmH1ZTCj-P1Yb1IXoi-YAwstaRsp24tZFRS11K8m9xvliDn8028urMUTX8RptO6bqEOe0NsiGgAegCAIpdTyvHzFZMcjRQrT-J9bZEDVK5w2I9VRlYf6seTC16SBPyLLKps8M3KKeTq8Rl62e0YwVMoXldqPft3wl2rKZPqkjFclPJJh-G5ZS368b2kYzi" style=""/>
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex flex-col justify-end p-6">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex h-2 w-2 rounded-full bg-red-500 animate-pulse"></span>
+<span class="text-white text-xs font-bold uppercase" style="">CÁMARA EN VIVO</span>
+</div>
+<h3 class="text-xl font-black text-white" style="">Vista del Puerto</h3>
+<p class="text-white/70 text-sm" style="">Monitoreo de condiciones en tiempo real</p>
+</div>
+<button class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-14 w-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30 group-hover:scale-110 transition-transform" style="">
+<span class="material-symbols-outlined text-3xl" style="">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

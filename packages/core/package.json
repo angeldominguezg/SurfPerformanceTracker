@@ -1,0 +1,17 @@
+{
+  "name": "@surf/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@surf/shared": "workspace:*",
+    "@supabase/supabase-js": "^2.49.1"
+  },
+  "devDependencies": {
+    "vitest": "^1.6.0",
+    "typescript": "^5.5.4"
+  }
+}
