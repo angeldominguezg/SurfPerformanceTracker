@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SourceProvider {
+  WINDGURU
+  SURFLINE
+  SURF_FORECAST
+  OTHER
+}
+
+enum WindType {
+  GLASSY
+  OFFSHORE
+  ONSHORE
+  CROSSSHORE
+}
+
+model Spot {
+  id          String          @id @default(cuid())
+  name        String
+  region      String?
+  country     String?
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  sourceUrls  SpotSourceUrl[]
+  reports     Report[]
+  sessions    Session[]
+}
+
+model SpotSourceUrl {
+  id        String         @id @default(cuid())
+  spotId    String
+  source    SourceProvider
+  url       String
+  isActive  Boolean        @default(true)
+  createdAt DateTime       @default(now())
+
+  spot      Spot           @relation(fields: [spotId], references: [id])
+
+  @@index([spotId])
+}
+
+model Report {
+  id              String               @id @default(cuid())
+  spotId          String
+  date            DateTime
+  analysisBrief   String?
+
+  energyKj        Float?
+  swellHeight     Float?
+  swellPeriod     Float?
+  swellDirection  String?
+
+  windSpeed       Float?
+  windDirection   String?
+  windType        WindType?
+
+  tide            String?
+  bestWindowStart DateTime?
+  bestWindowEnd   DateTime?
+
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @updatedAt
+
+  spot            Spot                 @relation(fields: [spotId], references: [id])
+  sourceReports   SourceReport[]
+  consolidated    ConsolidatedBlock[]
+  sessions        Session[]
+
+  @@unique([spotId, date])
+  @@index([spotId, date])
+}
+
+model SourceReport {
+  id        String         @id @default(cuid())
+  reportId  String
+  source    SourceProvider
+  sourceUrl String
+  notes     String?
+  createdAt DateTime       @default(now())
+
+  report    Report         @relation(fields: [reportId], references: [id])
+  blocks    SourceBlock[]
+
+  @@unique([reportId, source])
+  @@index([reportId])
+}
+
+model SourceBlock {
+  id             String       @id @default(cuid())
+  sourceReportId String
+  timeStart      DateTime
+  timeEnd        DateTime
+
+  energyKj       Float?
+  swellHeight    Float?
+  swellPeriod    Float?
+  swellDirection String?
+
+  windSpeed      Float?
+  windDirection  String?
+  windType       WindType?
+
+  tide           String?
+  rawPayload     Json?
+
+  sourceReport   SourceReport @relation(fields: [sourceReportId], references: [id])
+
+  @@unique([sourceReportId, timeStart, timeEnd])
+  @@index([sourceReportId, timeStart])
+}
+
+model ConsolidatedBlock {
+  id             String      @id @default(cuid())
+  reportId       String
+  timeStart      DateTime
+  timeEnd        DateTime
+
+  energyKj       Float?
+  swellHeight    Float?
+  swellPeriod    Float?
+  swellDirection String?
+
+  windSpeed      Float?
+  windDirection  String?
+  windType       WindType?
+
+  tide           String?
+  sourcesUsed    Json?
+
+  report         Report       @relation(fields: [reportId], references: [id])
+
+  @@unique([reportId, timeStart, timeEnd])
+  @@index([reportId, timeStart])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  spotId    String
+  reportId  String?
+  date      DateTime
+  startTime DateTime?
+  endTime   DateTime?
+  rating    Int?
+  notes     String?
+  createdAt DateTime @default(now())
+
+  spot      Spot     @relation(fields: [spotId], references: [id])
+  report    Report?  @relation(fields: [reportId], references: [id])
+
+  @@index([spotId, date])
+}
