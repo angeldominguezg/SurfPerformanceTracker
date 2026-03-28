@@ -1,4 +1,4 @@
-import "./globals.css";
+import "./tailwind.generated.css";
 
 export const metadata = { title: "Surf Performance Tracker" };
 

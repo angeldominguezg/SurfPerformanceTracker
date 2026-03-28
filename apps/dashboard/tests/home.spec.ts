@@ -2,5 +2,5 @@ import { test, expect } from "@playwright/test";
 
 test("home page loads", async ({ page }) => {
   await page.goto("/");
-  await expect(page.getByText("Surf Performance Tracker")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Pronóstico Los Pocitos" })).toBeVisible();
 });

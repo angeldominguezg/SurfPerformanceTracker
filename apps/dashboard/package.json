@@ -8,18 +8,19 @@
     "test": "playwright test"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
+    "@surf/core": "workspace:*",
+    "@surf/shared": "workspace:*",
     "next": "^14.2.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "@surf/shared": "workspace:*",
-    "@surf/core": "workspace:*",
-    "@supabase/supabase-js": "^2.49.1"
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "typescript": "^5.5.4",
     "@playwright/test": "^1.44.0",
-    "tailwindcss": "^3.4.3",
+    "@types/react": "19.2.14",
+    "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
-    "autoprefixer": "^10.4.19"
+    "tailwindcss": "^3.4.3",
+    "typescript": "^5.5.4"
   }
 }
